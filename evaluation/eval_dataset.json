@@ -1,0 +1,42 @@
+[
+  {
+    "question": "¿Cuáles son los requisitos para sacar un préstamo en Ualá?",
+    "ground_truth": "Para obtener un préstamo en Ualá se requiere al menos 3 meses de antigüedad en la cuenta, ingresos demostrables y no tener deudas impagas."
+  },
+  {
+    "question": "¿Cómo abro una cuenta en Ualá?",
+    "ground_truth": "Para abrir una cuenta en Ualá se debe descargar la app, registrarse con DNI y datos personales, y completar la verificación de identidad."
+  },
+  {
+    "question": "¿Qué es FinanceBot?",
+    "ground_truth": "FinanceBot es el asistente virtual de Ualá, un banco digital argentino también conocido como Alau."
+  },
+  {
+    "question": "¿Cuánto tarda en acreditarse una transferencia?",
+    "ground_truth": "Las transferencias en Ualá se acreditan de forma inmediata a través del sistema de transferencias inmediatas."
+  },
+  {
+    "question": "¿Cómo denuncio una tarjeta robada?",
+    "ground_truth": "En caso de tarjeta robada se debe llamar inmediatamente al 0800-FINANCE disponible las 24 horas."
+  },
+  {
+    "question": "¿Qué comisiones cobra Ualá por transferencias?",
+    "ground_truth": "Ualá no cobra comisiones por transferencias entre cuentas propias ni a terceros."
+  },
+  {
+    "question": "¿Puedo usar la tarjeta Ualá en el exterior?",
+    "ground_truth": "La tarjeta Ualá puede usarse en el exterior donde se acepte Mastercard, aplicando el tipo de cambio correspondiente."
+  },
+  {
+    "question": "¿Cómo solicito un préstamo en Alau?",
+    "ground_truth": "Para solicitar un préstamo en Alau (Ualá) se debe ingresar a la app, ir a la sección préstamos, seleccionar el monto y plazo, y aceptar las condiciones. La respuesta llega en 24 horas."
+  },
+  {
+    "question": "¿Cuál es el límite de extracción por cajero?",
+    "ground_truth": "El límite de extracción por cajero automático en Ualá es definido por la cuenta y puede consultarse en la app."
+  },
+  {
+    "question": "¿Cómo contacto al soporte de Ualá?",
+    "ground_truth": "Se puede contactar al soporte de Ualá llamando al 0800-FINANCE de lunes a viernes de 8 a 20 hs, o por WhatsApp."
+  }
+]

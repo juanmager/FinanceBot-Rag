@@ -1,0 +1,196 @@
+=== PREGUNTAS FRECUENTES — FINANCEBOT ===
+
+════════════════════════════════════════════════════
+SECCIÓN 1: APERTURA Y GESTIÓN DE CUENTA
+════════════════════════════════════════════════════
+
+PREGUNTA: ¿Cómo abro una cuenta en FinanceBot?
+
+RESPUESTA: Podés abrir tu cuenta 100% online en 3 pasos simples:
+1. Descargá la app FinanceBot desde App Store (iOS) o Google Play (Android)
+2. Fotografiá tu DNI (frente y dorso) con buena iluminación
+3. Completá el formulario con tus datos personales y tomá una selfie para verificar tu identidad
+
+El proceso completo tarda aproximadamente 5 minutos. Tu cuenta queda habilitada de forma inmediata y recibís tu CBU/CVU al instante.
+
+Requisitos indispensables:
+- Ser mayor de 18 años
+- Tener DNI argentino vigente
+- Contar con número de celular activo en Argentina
+- No es necesario tener historial bancario previo
+
+---
+
+PREGUNTA: ¿Cómo recupero mi contraseña si la olvidé?
+
+RESPUESTA: Si olvidaste tu contraseña, seguí estos pasos desde la pantalla de login:
+1. Tocá "Olvidé mi contraseña"
+2. Ingresá tu DNI y el correo electrónico asociado a la cuenta
+3. Recibirás un código de verificación de 6 dígitos por SMS
+4. Ingresá el código en la app y establecé una nueva contraseña
+
+El código tiene una vigencia de 10 minutos. Si no llega el SMS, verificá que el número registrado sea correcto o solicitá el reenvío.
+
+Si no tenés acceso al celular o email registrados, llamá al 0800-FINANCE (0800-362-4623) de lunes a viernes de 8 a 20 hs.
+
+---
+
+PREGUNTA: ¿Cómo actualizo mis datos personales (email, teléfono, domicilio)?
+
+RESPUESTA: Podés actualizar tus datos de contacto directamente desde la app:
+1. Ingresá a "Mi perfil" → "Editar datos"
+2. Modificá el email, teléfono o domicilio según necesites
+3. Confirmá con tu contraseña o huella digital
+
+Para cambios de nombre, apellido o CUIL/CUIT es necesario presentar documentación adicional. En ese caso, contactá a nuestro equipo de soporte a través del chat en la app.
+
+════════════════════════════════════════════════════
+SECCIÓN 2: OPERACIONES Y TRANSFERENCIAS
+════════════════════════════════════════════════════
+
+PREGUNTA: ¿Cómo hago una transferencia bancaria?
+
+RESPUESTA: Podés transferir dinero de estas formas desde la app:
+
+1. Por CBU o CVU: ingresá el número de 22 dígitos del destinatario
+2. Por alias: buscá el alias registrado (ej: JUAN.GARCIA.FINANCEBOT)
+3. A contactos frecuentes: guardá destinatarios habituales para agilizar las próximas transferencias
+4. Por QR: escaneá el código QR del destinatario
+
+Límites de transferencia:
+- Límite diario estándar: $500.000
+- Límite diario ampliado: hasta $2.000.000 (requiere habilitación previa desde la app)
+
+Las transferencias inmediatas están disponibles las 24 horas, los 7 días de la semana, incluyendo feriados.
+
+---
+
+PREGUNTA: ¿Cuánto tarda en acreditarse el dinero de una transferencia?
+
+RESPUESTA:
+- Entre cuentas FinanceBot: acreditación instantánea (segundos)
+- A cuentas de otros bancos: inmediata a través del sistema Transferencias 3.0 del BCRA (disponible 24/7)
+- Transferencias internacionales por Western Union: entre 1 y 3 días hábiles
+- Depósitos en efectivo en cajeros automáticos: hasta 2 horas hábiles
+
+---
+
+PREGUNTA: ¿Qué son y para qué sirven el CBU y el CVU?
+
+RESPUESTA:
+- CBU (Clave Bancaria Uniforme): número de 22 dígitos que identifica tu cuenta bancaria. Sirve para recibir transferencias desde cualquier banco, cobrar sueldos o domiciliar el pago de servicios.
+- CVU (Clave Virtual Uniforme): funciona igual que el CBU pero es específico para billeteras virtuales (Mercado Pago, Ualá, Naranja X, etc.).
+
+FinanceBot te asigna tanto CBU como CVU desde el momento de apertura de la cuenta. Los encontrás en: App → Mi cuenta → Ver CBU/CVU.
+
+════════════════════════════════════════════════════
+SECCIÓN 3: TARJETAS
+════════════════════════════════════════════════════
+
+PREGUNTA: ¿Qué hago si me roban o pierdo la tarjeta?
+
+RESPUESTA: Actuá inmediatamente para proteger tu dinero:
+
+1. Bloqueá la tarjeta desde la app: Tarjetas → [nombre de tu tarjeta] → Bloquear
+   (El bloqueo es instantáneo y gratuito)
+2. Si la encontrás, podés desbloquearla desde el mismo menú
+3. Si no la recuperás, solicitá la reposición desde la app: Tarjetas → Solicitar reposición
+
+Información importante:
+- La tarjeta física de reposición cuesta $500 y llega en 5 días hábiles
+- La tarjeta virtual de emergencia queda disponible inmediatamente después de bloquear la física
+- Para usar la tarjeta virtual: App → Tarjetas → Ver datos virtuales
+
+Para fraudes o transacciones sospechosas que no reconocés: llamá urgente al 0800-FINANCE disponible las 24 horas, los 365 días del año.
+
+---
+
+PREGUNTA: ¿Cómo funciona el programa de puntos?
+
+RESPUESTA: Acumulás puntos con cada compra con tu tarjeta de crédito FinanceBot:
+- Tarjeta Clásica: 1 punto por cada $100 de consumo
+- Tarjeta Gold: 2 puntos por cada $100 (3 puntos en viajes, gastronomía y turismo)
+
+Los puntos no tienen vencimiento. Podés canjearlos por:
+- Millas de Aerolíneas Argentinas o LATAM (1.000 puntos = 500 millas)
+- Descuentos en cuotas de tu resumen
+- Productos electrónicos, electrodomésticos y más en el catálogo de premios
+- Pago parcial o total del resumen (1.000 puntos = $100)
+
+Para ver tu saldo de puntos: App → Tarjetas → Programa de puntos.
+
+════════════════════════════════════════════════════
+SECCIÓN 4: PRÉSTAMOS E INVERSIONES
+════════════════════════════════════════════════════
+
+PREGUNTA: ¿Cómo solicito un préstamo personal?
+
+RESPUESTA: Podés solicitar tu préstamo 100% desde la app en estos pasos:
+1. Ingresá a "Préstamos" → "Solicitar préstamo personal"
+2. Seleccioná el monto deseado y el plazo de devolución
+3. La app calcula automáticamente la cuota mensual y la tasa aplicable
+4. Adjuntá los últimos 3 recibos de sueldo o constancia de ingresos (freelancers o monotributistas)
+5. Enviá la solicitud
+
+La respuesta llega dentro de las 24 horas hábiles. Si es aprobado, el dinero se acredita en tu cuenta en el día.
+
+Requisitos:
+- Ser cliente FinanceBot con más de 3 meses de antigüedad
+- Ingresos demostrables regulares
+- No registrar deudas impagas en el sistema financiero
+
+---
+
+PREGUNTA: ¿Que requisitos se necesitan para obtener un préstamo en Ualá? ¿Qué necesito para pedir un préstamo?
+
+RESPUESTA: Para acceder a un préstamo personal en Ualá (FinanceBot / Alau), los requisitos son:
+- Ser cliente con más de 3 meses de antigüedad en la cuenta
+- Contar con ingresos regulares demostrables (relación de dependencia, freelance o monotributista)
+- No registrar deudas impagas en el sistema financiero ni en Veraz
+
+Una vez que cumplís con estos requisitos, podés solicitarlo directamente desde la app en la sección "Préstamos". La aprobación llega en 24 horas hábiles y el dinero se acredita en el día si es aprobado.
+
+---
+
+PREGUNTA: ¿Qué pasa si me atraso en el pago de un préstamo?
+
+RESPUESTA: Es muy importante comunicarse antes del vencimiento si sabés que no vas a poder pagar:
+- Los atrasos generan un interés punitorio del 5% mensual sobre la cuota vencida
+- A partir de 30 días de mora, el préstamo figura en el sistema del BCRA (afecta la calificación crediticia)
+- A partir de 60 días, el préstamo puede ser cedido a un estudio jurídico de cobro
+- El historial crediticio negativo en Veraz puede durar hasta 5 años
+
+Si estás en dificultades, llamá al 0800-FINANCE o escribí por chat antes del vencimiento. FinanceBot ofrece planes de refinanciación para clientes con dificultades transitorias.
+
+════════════════════════════════════════════════════
+SECCIÓN 5: ATENCIÓN AL CLIENTE Y CANALES
+════════════════════════════════════════════════════
+
+PREGUNTA: ¿FinanceBot tiene sucursales físicas?
+
+RESPUESTA: FinanceBot es un banco 100% digital. No contamos con sucursales físicas.
+
+Todos los trámites y operaciones se realizan a través de:
+- App móvil: iOS (App Store) y Android (Google Play)
+- Portal web: www.financebot.com.ar
+- Atención telefónica: 0800-FINANCE (0800-362-4623) — lunes a viernes, 8 a 20 hs
+- WhatsApp: +54 9 11 XXXX-XXXX — lunes a viernes, 9 a 18 hs
+- Chat en vivo en la app: lunes a viernes, 8 a 20 hs
+- Correo electrónico: soporte@financebot.com.ar (respuesta en hasta 48 horas hábiles)
+
+Para emergencias (fraudes, bloqueo de tarjeta, transacciones no reconocidas): 0800-FINANCE disponible 24/7, los 365 días del año.
+
+---
+
+PREGUNTA: ¿Cómo presento un reclamo formal?
+
+RESPUESTA: Podés presentar un reclamo a través de los siguientes canales, en orden de preferencia:
+
+1. App FinanceBot: Menú → Ayuda → Presentar reclamo
+2. Chat en vivo: disponible en la app (L a V, 8 a 20 hs)
+3. Correo: reclamos@financebot.com.ar
+4. 0800-FINANCE: L a V de 8 a 20 hs
+
+FinanceBot tiene un plazo máximo de 15 días hábiles para responder a un reclamo formal.
+
+Si la respuesta no te satisface, podés escalar el reclamo ante el Banco Central de la República Argentina (BCRA) a través de la Dirección de Protección al Usuario de Servicios Financieros: www.bcra.gob.ar o llamando al 0800-666-7827.

@@ -1,0 +1,30 @@
+fastapi>=0.115.0
+uvicorn[standard]>=0.32.0
+
+# Google Gemini
+google-generativeai>=0.8.0
+google-api-core>=2.19.0
+
+# LangChain
+langchain>=0.3.0
+langchain-google-genai>=2.0.0
+langchain-community>=0.3.0
+langchain-pinecone>=0.2.0
+langchain-huggingface>=0.1.0
+langchain-text-splitters>=0.3.0
+
+# Vector store & embeddings
+pinecone>=5.0.0
+sentence-transformers>=3.0.0
+
+# Document loaders
+pypdf>=5.0.0
+python-multipart>=0.0.12
+
+# Config & utils
+pydantic>=2.9.0
+pydantic-settings>=2.6.0
+python-dotenv>=1.0.0
+
+# Compat Windows (evita conflicto Keras 3 / TF)
+tf-keras>=2.16.0
