@@ -102,3 +102,69 @@ jobs:
 
       - name: Build Docker image
         run: docker build -t financebot-rag:ci .
+
+  # ── Job 4: Deploy a Cloud Run (solo en push a main) ─────────────────────────
+  deploy:
+    name: 🚀 Deploy a Cloud Run
+    runs-on: ubuntu-latest
+    needs: docker
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    env:
+      PROJECT_ID: tokyo-trilogy-488822-a2
+      REGION: us-central1
+      SERVICE: financebot-rag
+      IMAGE: us-central1-docker.pkg.dev/tokyo-trilogy-488822-a2/financebot-repo/financebot-rag
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      # Autenticar en GCP con la service account key guardada en GitHub Secrets
+      - name: Autenticar en GCP
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      # Configurar gcloud CLI
+      - name: Configurar gcloud
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ env.PROJECT_ID }}
+
+      # Autorizar Docker para subir imágenes a Artifact Registry
+      - name: Configurar Docker para Artifact Registry
+        run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev --quiet
+
+      # Build de la imagen con el SHA del commit como tag + latest
+      - name: Build y push imagen a Artifact Registry
+        run: |
+          docker build \
+            -t ${{ env.IMAGE }}:${{ github.sha }} \
+            -t ${{ env.IMAGE }}:latest \
+            .
+          docker push ${{ env.IMAGE }}:${{ github.sha }}
+          docker push ${{ env.IMAGE }}:latest
+
+      # Deploy en Cloud Run — usa los secretos ya cargados en Secret Manager
+      - name: Deploy en Cloud Run
+        run: |
+          gcloud run deploy ${{ env.SERVICE }} \
+            --image="${{ env.IMAGE }}:${{ github.sha }}" \
+            --region=${{ env.REGION }} \
+            --platform=managed \
+            --no-allow-unauthenticated \
+            --memory=1Gi \
+            --cpu=1 \
+            --timeout=60 \
+            --min-instances=0 \
+            --max-instances=3 \
+            --set-secrets="GOOGLE_API_KEY=GOOGLE_API_KEY:latest,PINECONE_API_KEY=PINECONE_API_KEY:latest,PINECONE_INDEX_NAME=PINECONE_INDEX_NAME:latest,PINECONE_NAMESPACE=PINECONE_NAMESPACE:latest" \
+            --quiet
+
+      - name: URL del servicio
+        run: |
+          echo "✅ Deploy exitoso"
+          gcloud run services describe ${{ env.SERVICE }} \
+            --region=${{ env.REGION }} \
+            --format="value(status.url)"
