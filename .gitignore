@@ -63,4 +63,6 @@ logs/
 
 # ── Documentación interna (no pública) ───────────────────────────────────────
 CI_CD_Explicacion_Completa.docx
+Problemas_Pipeline_Solucionados.docx
 generar_doc_cicd.py
+generar_doc_problemas_pipeline.py
