@@ -4,7 +4,7 @@ Verifica el comportamiento del chatbot RAG sin consumir tokens reales.
 """
 
 import os
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 os.environ.setdefault("GOOGLE_API_KEY", "AIzaSy-test-key")
 
@@ -41,7 +41,7 @@ class TestChatAskEndpoint:
             answer="El límite diario estándar es $500.000.",
             sources=[],
             model="claude-3-5-sonnet-20241022",
-            timestamp=datetime.now(timezone.utc),
+            timestamp=datetime.now(UTC),
         )
 
         data = client.post("/chat/ask", json={"question": question}).json()
@@ -67,7 +67,7 @@ class TestChatAskEndpoint:
                 )
             ],
             model="claude-3-5-sonnet-20241022",
-            timestamp=datetime.now(timezone.utc),
+            timestamp=datetime.now(UTC),
         )
 
         sources = client.post("/chat/ask", json={"question": "test"}).json()["sources"]
