@@ -21,6 +21,11 @@ ENV/
 .env.local
 .env.*.local
 
+# ── Credenciales GCP (NUNCA commitear) ───────────────────────────────────────
+gcp-sa-key.json
+*-sa-key.json
+*.serviceaccount.json
+
 # ── Vector store (ChromaDB) ───────────────────────────────────────────────────
 # La base de vectores se regenera ingestando los documentos
 chroma_db/
