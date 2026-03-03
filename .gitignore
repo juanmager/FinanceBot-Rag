@@ -60,3 +60,7 @@ logs/
 
 # ── Documentos subidos localmente (datos sensibles de prueba) ─────────────────
 # data/uploads/  ← descomentar si agregás un directorio de uploads
+
+# ── Documentación interna (no pública) ───────────────────────────────────────
+CI_CD_Explicacion_Completa.docx
+generar_doc_cicd.py
