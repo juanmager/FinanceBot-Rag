@@ -53,7 +53,7 @@ class TestRAGServiceInit:
     def test_llm_is_initialized_with_correct_model(self, mock_vector_store, mock_settings):
         with patch("app.services.rag_service.ChatGoogleGenerativeAI") as mock_llm:
             mock_llm.return_value = MagicMock()
-            svc = RAGService(vector_store=mock_vector_store, settings=mock_settings)
+            RAGService(vector_store=mock_vector_store, settings=mock_settings)
 
             call_kwargs = mock_llm.call_args.kwargs
             assert call_kwargs["model"] == "gemini-2.0-flash"
@@ -61,7 +61,7 @@ class TestRAGServiceInit:
 
     def test_retriever_is_created_from_vector_store(self, mock_vector_store, mock_settings):
         with patch("app.services.rag_service.ChatGoogleGenerativeAI"):
-            svc = RAGService(vector_store=mock_vector_store, settings=mock_settings)
+            RAGService(vector_store=mock_vector_store, settings=mock_settings)
             mock_vector_store.as_retriever.assert_called_once()
 
     def test_settings_are_stored(self, rag_service, mock_settings):

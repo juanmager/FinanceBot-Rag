@@ -4,10 +4,7 @@ Verifica el comportamiento del chatbot RAG sin consumir tokens reales.
 """
 
 import os
-import pytest
-from datetime import datetime, timezone
-from unittest.mock import MagicMock
-from fastapi.testclient import TestClient
+from datetime import UTC, datetime
 
 os.environ.setdefault("GOOGLE_API_KEY", "AIzaSy-test-key")
 
@@ -36,7 +33,7 @@ class TestChatAskEndpoint:
 
     def test_ask_echoes_original_question(self, client, mock_rag):
         """La respuesta debe reflejar la pregunta enviada."""
-        from app.models import ChatResponse, SourceDocument
+        from app.models import ChatResponse
 
         question = "¿Cuánto es el límite de transferencia diario?"
         mock_rag.answer.return_value = ChatResponse(
@@ -44,7 +41,7 @@ class TestChatAskEndpoint:
             answer="El límite diario estándar es $500.000.",
             sources=[],
             model="claude-3-5-sonnet-20241022",
-            timestamp=datetime.now(timezone.utc),
+            timestamp=datetime.now(UTC),
         )
 
         data = client.post("/chat/ask", json={"question": question}).json()
@@ -70,7 +67,7 @@ class TestChatAskEndpoint:
                 )
             ],
             model="claude-3-5-sonnet-20241022",
-            timestamp=datetime.now(timezone.utc),
+            timestamp=datetime.now(UTC),
         )
 
         sources = client.post("/chat/ask", json={"question": "test"}).json()["sources"]
