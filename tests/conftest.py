@@ -11,7 +11,7 @@ Estrategia de testing:
 
 import os
 from contextlib import asynccontextmanager
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from unittest.mock import MagicMock
 
 import pytest
@@ -56,7 +56,7 @@ def make_mock_rag_service():
             )
         ],
         model="gemini-2.0-flash",
-        timestamp=datetime.now(UTC),
+        timestamp=datetime.now(timezone.utc),
     )
     return service
 
