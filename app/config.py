@@ -39,6 +39,9 @@ class Settings(BaseSettings):
     # ── Reranking ──────────────────────────────────────────────
     reranker_model: str = "BAAI/bge-reranker-v2-m3"
     reranker_candidates_multiplier: int = 2  # Baseline multiplier
+    # Si el mejor score del reranker queda por debajo -> fallback sin llamar al LLM.
+    # Calibrado con evaluation/calibrate_threshold.py
+    min_rerank_score: float = 0.0
 
     class Config:
         env_file = ".env"

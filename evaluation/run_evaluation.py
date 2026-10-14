@@ -93,8 +93,10 @@ def build_ragas_dataset(rag_service: RAGService) -> Dataset:
             print(f"  ⏳ Esperando {REQUEST_DELAY_SECONDS}s...")
             time.sleep(REQUEST_DELAY_SECONDS)
 
-        # RAGAS 0.4.x: retrieved_contexts es lista de strings
-        contexts = [src.content for src in chat_response.sources]
+        # RAGAS 0.4.x: retrieved_contexts es lista de strings.
+        # Se usan los chunks COMPLETOS que vio el LLM (antes: previews de 300 chars
+        # deduplicados por pagina, lo que subestimaba faithfulness y recall).
+        contexts = chat_response.contexts
 
         user_inputs.append(question)
         responses.append(chat_response.answer)

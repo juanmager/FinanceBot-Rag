@@ -3,6 +3,7 @@ Esquemas Pydantic centralizados para requests y responses de la API.
 """
 
 from datetime import datetime
+from typing import Literal
 
 from pydantic import BaseModel, Field
 
@@ -78,7 +79,13 @@ class ChatResponse(BaseModel):
 
     question: str = Field(..., description="Pregunta original")
     answer: str = Field(..., description="Respuesta generada por FinanceBot")
-    sources: list[SourceDocument] = Field(..., description="Documentos usados como contexto")
+    sources: list[SourceDocument] = Field(..., description="Fuentes citadas por la respuesta")
+    status: Literal["answered", "no_context"] = Field(
+        default="answered", description="no_context = el contexto no tenía la información"
+    )
+    urgent: bool = Field(default=False, description="La pregunta se detectó como urgencia (robo/fraude)")
+    # Contextos completos que vio el LLM: solo para evaluación (RAGAS), no se exponen en la API
+    contexts: list[str] = Field(default_factory=list, exclude=True)
     model: str = Field(..., description="Modelo de Gemini utilizado")
     timestamp: datetime = Field(..., description="Fecha y hora de la respuesta")
 
