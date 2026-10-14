@@ -27,6 +27,22 @@ from app.models import DocumentInfo, IngestResponse
 
 logger = logging.getLogger(__name__)
 
+
+class E5Embeddings(HuggingFaceEmbeddings):
+    """Wrapper sobre HuggingFaceEmbeddings que agrega los prefijos obligatorios
+    para modelos intfloat/multilingual-e5-*:
+      - Documentos → "passage: <texto>"
+      - Consultas   → "query: <texto>"
+    Sin estos prefijos el modelo produce embeddings de menor calidad.
+    """
+
+    def embed_documents(self, texts: list[str]) -> list[list[float]]:
+        prefixed = ["passage: " + t for t in texts]
+        return super().embed_documents(prefixed)
+
+    def embed_query(self, text: str) -> list[float]:
+        return super().embed_query("query: " + text)
+
 # Tipos de archivo soportados
 SUPPORTED_EXTENSIONS = {".pdf", ".txt"}
 
@@ -89,22 +105,27 @@ class IngestService:
         self.settings = settings or get_settings()
 
         logger.info(f"Cargando modelo de embeddings: {self.settings.embedding_model}")
-        self.embeddings = HuggingFaceEmbeddings(
+        _emb_kwargs = dict(
             model_name=self.settings.embedding_model,
             model_kwargs={"device": "cpu"},
             encode_kwargs={"normalize_embeddings": True},
         )
+        if "e5" in self.settings.embedding_model.lower():
+            self.embeddings = E5Embeddings(**_emb_kwargs)
+            logger.info("Usando E5Embeddings (prefijos 'passage:'/'query:' activados)")
+        else:
+            self.embeddings = HuggingFaceEmbeddings(**_emb_kwargs)
 
         logger.info(f"Inicializando Pinecone (índice: {self.settings.pinecone_index_name})")
         self.pc = Pinecone(api_key=self.settings.pinecone_api_key)
 
-        # Crear el índice si no existe (384 dims para all-MiniLM-L6-v2, métrica coseno)
+        # Crear el índice si no existe — dimensión leída desde config para evitar hardcoding
         index_name = self.settings.pinecone_index_name
         if not self.pc.has_index(index_name):
             logger.info(f"Creando índice Pinecone '{index_name}'...")
             self.pc.create_index(
                 name=index_name,
-                dimension=384,
+                dimension=self.settings.embedding_dimension,
                 metric="cosine",
                 spec=ServerlessSpec(cloud="aws", region="us-east-1"),
             )

@@ -13,7 +13,7 @@ class Settings(BaseSettings):
 
     # ── Google Gemini ────────────────────────────
     google_api_key: str
-    gemini_model: str = "gemini-2.0-flash"
+    gemini_model: str = "gemini-2.5-flash"
     max_tokens: int = 2048
 
     # ── App ────────────────────────────────────────────────────
@@ -22,9 +22,10 @@ class Settings(BaseSettings):
     debug: bool = False
 
     # ── RAG / Chunking ─────────────────────────────────────────
-    chunk_size: int = 1000          # Tamaño de cada fragmento en caracteres
-    chunk_overlap: int = 200        # Superposición entre fragmentos para mantener contexto
-    retriever_k: int = 4            # Número de fragmentos a recuperar por consulta
+    # RUN 18 (OFAT): Revert chunk_size. Testing System Prompt only.
+    chunk_size: int = 400           # REVERTED to baseline (Run 17 failed)
+    chunk_overlap: int = 80         # ~20% overlap for continuity
+    retriever_k: int = 10           # Baseline: retrieve 10 candidates
 
     # ── Pinecone ────────────────────────────────────────────────
     pinecone_api_key: str
@@ -32,8 +33,12 @@ class Settings(BaseSettings):
     pinecone_namespace: str = "financial_docs"
 
     # ── Embeddings ─────────────────────────────────────────────
-    # Modelo liviano (~90MB) que corre localmente sin API key adicional
-    embedding_model: str = "sentence-transformers/all-MiniLM-L6-v2"
+    embedding_model: str = "intfloat/multilingual-e5-large"
+    embedding_dimension: int = 1024
+
+    # ── Reranking ──────────────────────────────────────────────
+    reranker_model: str = "BAAI/bge-reranker-v2-m3"
+    reranker_candidates_multiplier: int = 2  # Baseline multiplier
 
     class Config:
         env_file = ".env"

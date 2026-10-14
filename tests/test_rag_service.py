@@ -30,6 +30,17 @@ def mock_settings():
     )
 
 
+@pytest.fixture(autouse=True)
+def mock_cross_encoder():
+    """CrossEncoder mockeado: evita descargar bge-reranker (~2 GB).
+    predict devuelve scores decrecientes → conserva el orden original de Pinecone."""
+    with patch("app.services.rag_service.CrossEncoder") as mock_ce_class:
+        mock_ce_class.return_value.predict.side_effect = lambda pairs: [
+            float(len(pairs) - i) for i in range(len(pairs))
+        ]
+        yield mock_ce_class
+
+
 @pytest.fixture
 def mock_vector_store():
     """ChromaDB mockeado que devuelve un retriever también mockeado."""
@@ -189,15 +200,31 @@ class TestRAGServiceAnswer:
         assert result.sources[0].source == "Desconocido"
 
     def test_answer_calls_retriever_with_question(self, rag_service):
-        """similarity_search_with_score debe invocarse con la pregunta original y k correcto."""
+        """Debe pedir k * multiplier candidatos a Pinecone para dar margen al reranker."""
         rag_service.vector_store.similarity_search_with_score = MagicMock(return_value=[])
         rag_service.llm.invoke = MagicMock(return_value=AIMessage(content="Ok."))
 
         rag_service.answer("¿Qué es el BCRA?")
 
+        expected_k = 3 * rag_service.settings.reranker_candidates_multiplier
         rag_service.vector_store.similarity_search_with_score.assert_called_once_with(
-            "¿Qué es el BCRA?", k=3
+            "¿Qué es el BCRA?", k=expected_k
         )
+
+    def test_reranker_reorders_and_keeps_top_k(self, rag_service):
+        """El orden final lo decide el CrossEncoder y se conservan solo k chunks."""
+        docs = [
+            (Document(page_content=f"chunk {i}", metadata={"source": f"doc{i}.txt"}), 0.9)
+            for i in range(6)
+        ]
+        rag_service.vector_store.similarity_search_with_score = MagicMock(return_value=docs)
+        # Scores crecientes → el reranker invierte el orden de Pinecone
+        rag_service.reranker.predict = MagicMock(side_effect=lambda pairs: list(range(len(pairs))))
+        rag_service.llm.invoke = MagicMock(return_value=AIMessage(content="Ok."))
+
+        result = rag_service.answer("¿Pregunta?")
+
+        assert [s.source for s in result.sources] == ["doc5.txt", "doc4.txt", "doc3.txt"]
 
     def test_answer_calls_llm_with_system_and_human_messages(self, rag_service):
         """El LLM debe recibir una lista con SystemMessage y HumanMessage."""

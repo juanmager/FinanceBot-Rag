@@ -1,42 +1,152 @@
 [
   {
-    "question": "¿Cuáles son los requisitos para sacar un préstamo en Ualá?",
-    "ground_truth": "Para obtener un préstamo en Ualá se requiere al menos 3 meses de antigüedad en la cuenta, ingresos demostrables y no tener deudas impagas."
+    "question": "¿Cuál es la entidad que otorga el préstamo personal en Ualá y cuál es su CUIT?",
+    "ground_truth": "Ualá Bank S.A.U. (de forma indistinta, 'Ualá' o 'Banco'), CUIT N° 30-71565463-2, con domicilio en la Avenida Coronel Marcelino E. Freyre 3650, Piso 1, Oficina 105 de la Ciudad Autónoma de Buenos Aires, acuerda con el Usuario del Banco registrado a través de la aplicación móvil 'Ualá' ('App') el otorgamiento de un préstamo personal, correspondiente a la cartera de consumo.",
+    "source": "tyc_uala_bank_prestamo_personal_diciembre_2025.pdf - p.3 Cláusula 1"
   },
   {
-    "question": "¿Cómo abro una cuenta en Ualá?",
-    "ground_truth": "Para abrir una cuenta en Ualá se debe descargar la app, registrarse con DNI y datos personales, y completar la verificación de identidad."
+    "question": "¿Cómo se inicia el proceso de apertura de una Caja de Ahorros en Ualá Bank?",
+    "ground_truth": "Mediante la aceptación de estos Términos y Condiciones, el Usuario inicia el proceso de registro y solicitud de apertura de una caja de ahorros en pesos en Ualá (la 'Cuenta'), sujeto a la previa aprobación de Ualá.",
+    "source": "terminos_condiciones_banco_caja_ahorros.pdf - p.2 Cláusula 1"
   },
   {
-    "question": "¿Qué es FinanceBot?",
-    "ground_truth": "FinanceBot es el asistente virtual de Ualá, un banco digital argentino también conocido como Alau."
+    "question": "¿Cuáles son los canales de contacto oficiales de Ualá para consultas sobre el préstamo personal?",
+    "ground_truth": "exclusivamente a través de los siguientes canales oficiales de contacto: a) mensaje vía correo electrónico a atencion@uala.com.ar; b) chat disponible en la App; c) cualquier otro canal de contacto que Ualá habilite a futuro y sea debidamente notificado a sus usuarios ('Canales de Contacto').",
+    "source": "tyc_uala_bank_prestamo_personal_diciembre_2025.pdf - p.8 Cláusula 21"
   },
   {
-    "question": "¿Cuánto tarda en acreditarse una transferencia?",
-    "ground_truth": "Las transferencias en Ualá se acreditan de forma inmediata a través del sistema de transferencias inmediatas."
+    "question": "¿Cómo se calcula el interés compensatorio de cada cuota de un préstamo en Ualá Bank?",
+    "ground_truth": "El cálculo de los Intereses Compensatorios de cada Cuota se realizará multiplicando el saldo pendiente de pago del Préstamo ('Saldo Deudor') por la TNA dividido por 365 (trescientos sesenta y cinco) días y luego será multiplicado por la cantidad de días correspondientes al plazo de cada Cuota. Los Intereses Compensatorios incluyen el Impuesto al Valor Agregado (IVA).",
+    "source": "tyc_uala_bank_prestamo_personal_diciembre_2025.pdf - p.4 Cláusula 6"
   },
   {
-    "question": "¿Cómo denuncio una tarjeta robada?",
-    "ground_truth": "En caso de tarjeta robada se debe llamar inmediatamente al 0800-FINANCE disponible las 24 horas."
+    "question": "¿Cuándo puede Ualá exigir el pago íntegro de una refinanciación antes de su vencimiento?",
+    "ground_truth": "Ualá también tendrá la facultad de considerar la deuda como de plazo vencido y exigir el pago íntegro de todo lo adeudado en virtud de la Refinanciación en los siguientes casos: (i) si hay modificación en desmedro de Ualá de la situación patrimonial del Usuario; (ii) si el Usuario pidiera su propio concurso preventivo o si pidieran o pidiera su propia quiebra, o promovieran acuerdos judiciales o extrajudiciales con otros acreedores, o si incurrieran en cesación de pagos aún sin efectuarse los trámites antedichos.",
+    "source": "ar_tyc_refinanciacion.pdf - p.2 Cláusula 10.5"
   },
   {
-    "question": "¿Qué comisiones cobra Ualá por transferencias?",
-    "ground_truth": "Ualá no cobra comisiones por transferencias entre cuentas propias ni a terceros."
+    "question": "¿Tienen comisiones o cargos los préstamos personales otorgados por Ualá?",
+    "ground_truth": "No existen comisiones y cargos para el usuario en virtud del Préstamo.",
+    "source": "ar_contratos_resumen_tyc_prestamos.pdf - p.0"
   },
   {
-    "question": "¿Puedo usar la tarjeta Ualá en el exterior?",
-    "ground_truth": "La tarjeta Ualá puede usarse en el exterior donde se acepte Mastercard, aplicando el tipo de cambio correspondiente."
+    "question": "¿Cuánto cuesta la extracción de dinero en cajero automático en el exterior con la tarjeta Ualá?",
+    "ground_truth": "Extracción en cajero automático en el exterior: USD 10 por transacción",
+    "source": "tyc_uala_app_prepaga_bis_diciembre_2025.pdf - p.16 Anexo I"
   },
   {
-    "question": "¿Cómo solicito un préstamo en Alau?",
-    "ground_truth": "Para solicitar un préstamo en Alau (Ualá) se debe ingresar a la app, ir a la sección préstamos, seleccionar el monto y plazo, y aceptar las condiciones. La respuesta llega en 24 horas."
+    "question": "¿Cómo se perfecciona y acepta el contrato de préstamo en la app de Ualá?",
+    "ground_truth": "La oferta de Préstamo realizada a través de la App se considerará aceptada por parte del Usuario y este Contrato se tendrá por perfeccionado y plenamente vinculante para ambas Partes, en el momento en que el Usuario manifieste su consentimiento mediante (i) la activación del botón 'Confirmar Préstamo' disponible en la App y (ii) la inclusión de su nombre completo en el campo de firma digital.",
+    "source": "tyc_uala_bank_prestamo_personal_diciembre_2025.pdf - p.4 Cláusula 3"
   },
   {
-    "question": "¿Cuál es el límite de extracción por cajero?",
-    "ground_truth": "El límite de extracción por cajero automático en Ualá es definido por la cuenta y puede consultarse en la app."
+    "question": "¿Cómo se estructuran las cuotas del préstamo Ualá Bank y cuándo vence la primera?",
+    "ground_truth": "El Préstamo será cancelado en [●] cuotas mensuales, fijas y consecutivas del monto indicado en el encabezado de este Contrato. El capital del Préstamo será amortizado de acuerdo a lo establecido en la 'Tabla de Amortización' adjunta a este Contrato como Anexo I ('Sistema de Amortización'), el cual refleja las Cuotas periódicas y sucesivas del capital e intereses. El vencimiento de la primera Cuota del Préstamo se producirá el día indicado en el encabezado de este Contrato y las restantes el mismo día de cada mes subsiguiente.",
+    "source": "tyc_uala_bank_prestamo_personal_diciembre_2025.pdf - p.4 Cláusula 5"
   },
   {
-    "question": "¿Cómo contacto al soporte de Ualá?",
-    "ground_truth": "Se puede contactar al soporte de Ualá llamando al 0800-FINANCE de lunes a viernes de 8 a 20 hs, o por WhatsApp."
+    "question": "¿Cuáles son los canales de contacto para consultas y reclamos sobre refinanciaciones de Ualá?",
+    "ground_truth": "El Usuario deberá realizar sus consultas, quejas o reclamos exclusivamente a través de los siguientes canales oficiales de contacto: a) mensaje vía correo electrónico a hola@uala.com.ar; b) chat disponible en la App; c) cualquier otro canal de contacto que Ualá habilite a futuro y sea debidamente notificado a sus usuarios ('Canales de Contacto').",
+    "source": "ar_tyc_refinanciacion.pdf - p.5 Cláusula 22"
+  },
+  {
+    "question": "¿Cuándo se produce la mora en el pago de cuotas de un préstamo en Ualá Bank?",
+    "ground_truth": "La mora en el pago de las cuotas de amortización de capital y/o de intereses, como así también de cualquier obligación accesoria, se producirá de pleno derecho y en forma automática y por el sólo vencimiento de los plazos acordados, sin necesidad de aviso previo alguno, judicial o extrajudicial.",
+    "source": "tyc_uala_bank_prestamo_personal_diciembre_2025.pdf - p.5 Cláusula 12.3"
+  },
+  {
+    "question": "¿Qué intereses punitorios aplica Ualá Bank cuando un usuario entra en mora?",
+    "ground_truth": "Producida la mora, y por todo el tiempo que dure la misma, el Usuario deberá abonar intereses punitorios, cuya tasa será del 50% de los Intereses Compensatorios, y se adicionarán a estos últimos.",
+    "source": "tyc_uala_bank_prestamo_personal_diciembre_2025.pdf - p.5 Cláusula 12.4"
+  },
+  {
+    "question": "¿Qué ocurre si se precancela un préstamo en Ualá Bank dentro de los primeros 180 días?",
+    "ground_truth": "Si la precancelación, total o parcial, se realizara dentro de los 180 (ciento ochenta) días corridos desde el otorgamiento del Préstamo o la cuarta parte del plazo original de la financiación, de ambos plazos el mayor, Ualá aplicará una comisión porcentual sobre el capital adeudado.",
+    "source": "tyc_uala_bank_prestamo_personal_diciembre_2025.pdf - p.5 Cláusula 10"
+  },
+  {
+    "question": "¿Cuánto tiempo tiene el usuario para revocar la aceptación de un préstamo Ualá Bank?",
+    "ground_truth": "El Usuario tendrá derecho a revocar su aceptación del Contrato dentro del plazo de 10 días hábiles a contar desde la fecha de recepción del contrato o desde la fecha de acreditación del Préstamo en la cuenta, lo último que ocurra, sin necesidad de indicar las razones y sin penalidad alguna.",
+    "source": "tyc_uala_bank_prestamo_personal_diciembre_2025.pdf - p.8 Cláusula 22"
+  },
+  {
+    "question": "¿Cuánto cobra Ualá por extracciones en cajero automático en Argentina?",
+    "ground_truth": "Extracción en cajero automático en las redes Link y Banelco habilitadas en Argentina: $3.000 por transacción",
+    "source": "tyc_uala_app_prepaga_bis_diciembre_2025.pdf - p.16 Anexo I"
+  },
+  {
+    "question": "¿Cuánto cuesta la reimpresión de la tarjeta Ualá a partir de la segunda emisión?",
+    "ground_truth": "Reimpresión de tarjeta prepaga: $9.000 A partir de la segunda tarjeta emitida",
+    "source": "tyc_uala_app_prepaga_bis_diciembre_2025.pdf - p.16 Anexo I"
+  },
+  {
+    "question": "¿Cuánto cobra Ualá por depósito de efectivo en redes extrabancarias?",
+    "ground_truth": "Depósito de efectivo en redes extrabancarias: Gratis de $0 hasta $5.000 mensuales / 1,5% + IVA desde $5.001 hasta $50.000 / 3,5% + IVA desde $50.001",
+    "source": "tyc_uala_app_prepaga_bis_diciembre_2025.pdf - p.16 Anexo I"
+  },
+  {
+    "question": "¿Con cuánta anticipación avisa Ualá sobre cambios en las condiciones de la cuenta prepaga?",
+    "ground_truth": "te vamos a avisar con 60 días corridos de anticipación, salvo que la modificación sea más favorable para vos",
+    "source": "tyc_uala_app_prepaga_bis_diciembre_2025.pdf - p.13"
+  },
+  {
+    "question": "¿Qué servicios son gratuitos en la cuenta de pago Ualá?",
+    "ground_truth": "Descarga de la App / Apertura, mantenimiento y cierre de cuenta de pago / Emisión y envío de la tarjeta prepaga / Pagos con transferencia - QR / Transferencias inmediatas",
+    "source": "tyc_uala_app_prepaga_bis_diciembre_2025.pdf - p.13"
+  },
+  {
+    "question": "¿Desde cuándo se efectiviza el bloqueo de una tarjeta Ualá por extravío o sustracción?",
+    "ground_truth": "El bloqueo será procesado por Alau y efectivizado a partir de la hora cero del día de la denuncia de la sustracción o extravío.",
+    "source": "tyc_uala_app_prepaga_bis_diciembre_2025.pdf - p.18"
+  },
+  {
+    "question": "¿Qué responsabilidad tiene el usuario si no denuncia el extravío de su tarjeta Ualá?",
+    "ground_truth": "En caso de omitir el trámite de aviso, el Usuario será responsable por las compras que se efectúen con Tarjeta Prepaga extraviada, hurtada, robada, duplicada o vulnerada en su seguridad, hasta su vencimiento o eventual recupero.",
+    "source": "tyc_uala_app_prepaga_bis_diciembre_2025.pdf - p.19"
+  },
+  {
+    "question": "¿Cuánto tiempo tiene el usuario para revocar la aceptación de los Términos de la Caja de Ahorro en Ualá Bank?",
+    "ground_truth": "Tenés derecho a revocar la aceptación de los Términos y Condiciones dentro un plazo de 10 días hábiles a contar desde el día siguiente a la fecha de la aceptación, sin necesidad de que nos indiques razones. Podés hacer uso de este derecho comunicándote con nosotros a través de los canales habilitados o haciendo click en el 'Botón de Arrepentimiento' que encontrarás disponible a través del Canal.",
+    "source": "terminos_condiciones_banco_caja_ahorros.pdf - p.2 Cláusula 15"
+  },
+  {
+    "question": "¿En qué plazo se considera aceptado el resumen de cuenta si el usuario no lo impugna?",
+    "ground_truth": "El Resumen se considerará aceptado si no lo impugnare dentro de los 60 días corridos de lo publicado o enviado. El Resumen podrá ser consultado a través de la App de Ualá y cualquier otro medio que pudiera existir en el futuro.",
+    "source": "terminos_condiciones_banco_caja_ahorros.pdf - p.5 Cláusula 7"
+  },
+  {
+    "question": "¿Con cuánta anticipación notifica Ualá Bank al usuario sobre modificaciones en los Términos de la Caja de Ahorro?",
+    "ground_truth": "El resto de las modificaciones serán notificadas previamente al Usuario con una antelación mínima de 60 días corridos anteriores a la fecha de entrada en vigencia de las nuevas condiciones.",
+    "source": "terminos_condiciones_banco_caja_ahorros.pdf - p.9 Cláusula 16"
+  },
+  {
+    "question": "¿Cuáles son las condiciones del Plazo Fijo UVA Precancelable en Ualá Bank?",
+    "ground_truth": "Plazo Fijo en Unidades de Valor Adquisitivo ('UVA') Pre-cancelable: (ii) plazo de vigencia mínimo de 180 (ciento ochenta) días corridos; (v) será precancelable a partir de los 30 días corridos por parte del Usuario siempre que curse un aviso de cancelación anticipada de 5 días hábiles previos; (vi) intransferible; (vii) no endosable.",
+    "source": "terminos_condiciones_banco_caja_ahorros.pdf - p.17"
+  },
+  {
+    "question": "¿Qué comisiones tiene la Cuenta Gratuita Universal (CGU) de Ualá y cuántas extracciones en cajero están incluidas sin costo?",
+    "ground_truth": "CGU no estará afectada por cargos ni comisiones a la apertura, su mantenimiento, movimientos de fondos y consulta de saldos. A su vez se pueden realizar hasta ocho extracciones mensuales en cajeros automáticos de distintos bancos o redes del país sin costos y comisiones.",
+    "source": "terminos_condiciones_banco_caja_ahorros.pdf - p.21"
+  },
+  {
+    "question": "¿Cuántos puntos Ualá+ se acumulan por compras con tarjeta prepaga, QR y tarjeta de crédito?",
+    "ground_truth": "Compra con Tarjeta Prepaga: 1.- (un) punto por cada $80 (pesos ochenta). / Compra con código QR Ualá: 1.- (un) punto por cada $80- (pesos ochenta). / Pago de servicios a través de la Aplicación Ualá: 1.- (un) punto por cada $80- (pesos ochenta). / Compra con Tarjeta de Crédito: 1 (un) punto por cada $50 (pesos cincuenta).",
+    "source": "terminos_condiciones_uala_modificaciones_octubre_2025.pdf - p.2 Cláusula 4.3"
+  },
+  {
+    "question": "¿Cuándo se acreditan los Puntos Ualá+ obtenidos por compras con Tarjeta de Crédito?",
+    "ground_truth": "Los Puntos Ualá+ obtenidos por las compras efectuadas con la Tarjeta de Crédito, serán acreditados a cada Usuario dentro los primeros 10 (diez) días hábiles del mes siguiente a la fecha en que se efectuaron las compras correspondientes.",
+    "source": "terminos_condiciones_uala_modificaciones_octubre_2025.pdf - p.3 Cláusula 4.6"
+  },
+  {
+    "question": "¿Cuándo caducan automáticamente los Puntos Ualá+ por inactividad?",
+    "ground_truth": "Los Puntos Ualá+ también caducarán automáticamente y sin necesidad de notificación alguna: Cuando los Usuarios adherido al Programa Ualá+ dejen de registrar consumos o movimientos con la Aplicación Ualá y/o Tarjeta Prepaga y/o Tarjeta de Crédito por 6 (seis) meses...",
+    "source": "terminos_condiciones_uala_modificaciones_octubre_2025.pdf - p.5 Cláusula 8.4"
+  },
+  {
+    "question": "¿Se pueden transferir los Puntos Ualá+ a otra persona o usuario?",
+    "ground_truth": "Los Puntos Ualá+, la EXP y/o los beneficios no podrán ser transferidos a ninguna otra persona o entidad ni bajo ningún título o causa (fallecimiento, incapacidad, disolución de la sociedad conyugal, etc.) y tampoco podrán ser transferidos a ningún otro Usuario adherido al Programa Ualá+ como de cualquier otra aplicación móvil, salvo expreso consentimiento de Alau.",
+    "source": "terminos_condiciones_uala_modificaciones_octubre_2025.pdf - p.6 Cláusula 9.1"
   }
 ]

@@ -61,8 +61,8 @@ logs/
 # ── Documentos subidos localmente (datos sensibles de prueba) ─────────────────
 # data/uploads/  ← descomentar si agregás un directorio de uploads
 
-# ── Documentación interna (no pública) ───────────────────────────────────────
-CI_CD_Explicacion_Completa.docx
-Problemas_Pipeline_Solucionados.docx
-generar_doc_cicd.py
-generar_doc_problemas_pipeline.py
+# ── Notas personales ─────────────────────────────────────────────────────────
+TODO.md
+
+# ── Documentación técnica interna (no pública) ────────────────────────────────
+tech_docs/
