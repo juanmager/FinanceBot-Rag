@@ -17,4 +17,8 @@ Registro de cambios (código, infra y GCP). Formato: fecha · qué · por qué.
 - **Eval**: `evaluation/calibrate_threshold.py` para calibrar el umbral (solo Pinecone + reranker, sin Gemini).
 - **Claude Code**: `.claude/rules/tests.md` (convenciones de tests con carga condicional por ruta, CCA D3).
 - **Tests**: 61 → 76 (guardas deterministas, citas, contexts).
-- **Pendiente**: en este equipo cargar `multilingual-e5-large` crashea PyTorch (access violation, torch 2.10 / transformers 5.2 / sentence-transformers 5.2.3); bloquea calibración y evaluación local. README desactualizado (menciona Claude/ChromaDB).
+- **Fix crash PyTorch**: no era la versión, sino la carga paralela de pesos de transformers 5 al cargar un 2º modelo (e5 + reranker) en Windows. `app/__init__.py` fija `HF_DEACTIVATE_ASYNC_LOAD=1` (carga secuencial).
+- **Umbral calibrado**: `min_rerank_score = 0.1`. Fuera de tema ≤ 0,001 (salvo "plazo fijo Banco Nación" 0,395); en dominio mín 0,245.
+- **Docs**: README y `.env.example` actualizados a Gemini + Pinecone + e5 + reranker (el `.env.example` traía MiniLM 384-dim, incompatible con el índice de 1024, y chunk/k viejos).
+- **Eval**: el cache de respuestas (`eval_dataset_cache.json`) ahora solo se usa con `--use-cache`; antes se reusaba en silencio y evaluaba respuestas viejas aunque cambiara el código.
+- **Bloqueo (Gemini)**: la API key devuelve `402 RESOURCE_EXHAUSTED — prepayment credits are depleted` (el proyecto de AI Studio pasó a facturación prepaga sin crédito). No hubo cobro. Bloquea la evaluación RAGAS y el chat; sin tráfico en Cloud Run en 90 días.

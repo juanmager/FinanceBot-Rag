@@ -1,7 +1,7 @@
 # 🏦 FinanceBot — Asistente Financiero RAG
 
 > **Proyecto 2 — AI Engineer Portfolio**  
-> Sistema de **Retrieval-Augmented Generation (RAG)** construido con LangChain, ChromaDB y Claude (Anthropic).  
+> Sistema de **Retrieval-Augmented Generation (RAG)** construido con LangChain, Pinecone y Gemini, sobre los términos y condiciones de Ualá.  
 > Temado como asistente de atención al cliente de un banco digital argentino.
 
 ---
@@ -28,23 +28,29 @@
  Documento (PDF/TXT)
         │
         ▼
-  [Chunking]  ──→  Fragmentos de texto (~1000 chars)
+  [Chunking]  ──→  Fragmentos de ~400 chars (overlap 80)
         │
         ▼
-  [Embeddings]  ──→  Vectores numéricos (all-MiniLM-L6-v2, local)
+  [Embeddings]  ──→  multilingual-e5-large (1024 dim, local)
         │
         ▼
-  [ChromaDB]  ──→  Vector store persistido en disco
+  [Pinecone]  ──→  Vector store serverless (free tier)
         │
         │   (al recibir una pregunta)
         ▼
-  [Retriever]  ──→  Top-K fragmentos más similares semánticamente
+  [Retriever]  ──→  20 candidatos por similitud coseno
         │
         ▼
-  [Claude LLM]  ──→  Genera respuesta basada SOLO en el contexto recuperado
+  [Reranker]  ──→  bge-reranker-v2-m3 elige los 10 mejores
+        │          (score < MIN_RERANK_SCORE → respuesta fija, sin LLM)
+        ▼
+  [Gemini 2.5 Flash]  ──→  Salida estructurada: answer + cited_fragments + found_in_context
         │
         ▼
-  Respuesta + Fuentes citadas
+  Guardas en código: citas validadas, aviso de urgencia 24/7, fallback "sin información"
+        │
+        ▼
+  Respuesta + solo las fuentes citadas
 ```
 
 ### Stack tecnológico
@@ -53,9 +59,12 @@
 |---|---|
 | Framework API | FastAPI |
 | Orquestación LLM | LangChain 0.3 |
-| LLM | Claude 3.5 Sonnet (Anthropic) |
-| Embeddings | `sentence-transformers/all-MiniLM-L6-v2` (local) |
-| Vector Store | ChromaDB (persistido en disco) |
+| LLM | Gemini 2.5 Flash (free tier) |
+| Embeddings | `intfloat/multilingual-e5-large` (local) |
+| Reranker | `BAAI/bge-reranker-v2-m3` (CrossEncoder) |
+| Vector Store | Pinecone serverless |
+| Evaluación | RAGAS (faithfulness, precision, recall, relevancy) |
+| Deploy | Cloud Run (push a `main` → CI/CD) |
 | Chunking | `RecursiveCharacterTextSplitter` |
 | Loaders | `PyPDFLoader` (PDF) + `TextLoader` (TXT) |
 | Containerización | Docker + Docker Compose |
@@ -96,13 +105,13 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-> ⚠️ La primera instalación tarda varios minutos por `sentence-transformers` y `chromadb`.
+> ⚠️ La primera instalación tarda varios minutos por `sentence-transformers` y `torch`.
 
 ### 3. Configurar variables de entorno
 
 ```bash
 cp .env.example .env
-# Editá .env y agregá tu ANTHROPIC_API_KEY
+# Editá .env y agregá GOOGLE_API_KEY y PINECONE_API_KEY
 ```
 
 ### 4. Iniciar el servidor
@@ -111,7 +120,7 @@ cp .env.example .env
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8001
 ```
 
-> ⚠️ El **primer inicio** puede tardar 30-60 segundos mientras descarga el modelo de embeddings.
+> ⚠️ El **primer inicio** puede tardar 30-60 segundos mientras descarga los modelos de embeddings y reranker (~3 GB).
 
 ### 5. Documentación interactiva
 
@@ -139,7 +148,7 @@ Para detener:
 docker compose down
 ```
 
-> **Nota:** La base de vectores ChromaDB se persiste en el volumen `chroma_data`. Los documentos que indexás sobreviven reinicios del contenedor.
+> **Nota:** Los vectores viven en Pinecone, así que sobreviven a reinicios y redeploys del contenedor.
 
 ---
 
@@ -187,19 +196,21 @@ curl -X POST http://localhost:8001/chat/ask \
 
 ```json
 {
-  "question": "¿Cuánto es la tasa del plazo fijo?",
-  "answer": "La Tasa Nominal Anual (TNA) del Plazo Fijo FinanceBot es del **45%**, revisable mensualmente según la política del BCRA. El monto mínimo es de $1.000 y podés elegir plazos de 30, 60, 90, 180 o 365 días.",
+  "question": "¿Qué hago si me roban la tarjeta?",
+  "answer": "Podés bloquear la tarjeta desde la app...
+
+⚠️ Si es una urgencia (tarjeta robada o fraude), llamá ya al 0800-FINANCE, disponible 24/7.",
   "sources": [
-    {
-      "content": "TNA vigente: 45% (se actualiza mensualmente según política del BCRA)\nPlazos disponibles: 30, 60, 90, 180 y 365 días...",
-      "source": "productos_financieros.txt",
-      "page": null
-    }
+    {"content": "...", "source": "tyc_uala.pdf", "page": 12, "similarity_score": 0.84}
   ],
-  "model": "claude-3-5-sonnet-20241022",
-  "timestamp": "2026-02-21T15:00:00Z"
+  "status": "answered",
+  "urgent": true,
+  "model": "gemini-2.5-flash",
+  "timestamp": "2026-10-14T15:00:00Z"
 }
 ```
+
+`status` es `no_context` cuando el contexto no tiene la información (respuesta fija). `urgent` lo detecta el código, no el LLM.
 
 ### 4. Ver documentos indexados
 
@@ -224,21 +235,35 @@ pytest --cov=app --cov-report=html -v
 
 Los tests usan **mocks** para los servicios de ML — no descargan modelos ni consumen tokens.
 
+## Evaluación (RAGAS)
+
+```bash
+python evaluation/run_evaluation.py        # 30 preguntas, ~30 min (--use-cache reusa respuestas)
+python evaluation/analyze_results.py       # peores preguntas: fallos de retrieval vs generación
+python evaluation/calibrate_threshold.py   # calibra MIN_RERANK_SCORE (sin Gemini)
+```
+
+Historial de corridas en `MASTER_LOG_2026-03-26.md`; cambios en `CHANGELOG.md`.
+
 ---
 
 ## Variables de entorno
 
 | Variable | Requerida | Default | Descripción |
 |---|---|---|---|
-| `ANTHROPIC_API_KEY` | ✅ Sí | — | API key de Anthropic |
-| `ANTHROPIC_MODEL` | No | `claude-3-5-sonnet-20241022` | Modelo a usar |
+| `GOOGLE_API_KEY` | ✅ Sí | — | API key de Gemini (AI Studio) |
+| `PINECONE_API_KEY` | ✅ Sí | — | API key de Pinecone |
+| `GEMINI_MODEL` | No | `gemini-2.5-flash` | Modelo a usar |
 | `MAX_TOKENS` | No | `2048` | Máximo de tokens en respuesta |
-| `CHUNK_SIZE` | No | `1000` | Tamaño de fragmentos (chars) |
-| `CHUNK_OVERLAP` | No | `200` | Superposición entre fragmentos |
-| `RETRIEVER_K` | No | `4` | Fragmentos a recuperar por query |
-| `CHROMA_PERSIST_DIR` | No | `./chroma_db` | Directorio de persistencia |
-| `CHROMA_COLLECTION_NAME` | No | `financial_docs` | Nombre de la colección |
-| `EMBEDDING_MODEL` | No | `sentence-transformers/all-MiniLM-L6-v2` | Modelo de embeddings |
+| `CHUNK_SIZE` | No | `400` | Tamaño de fragmentos (chars) |
+| `CHUNK_OVERLAP` | No | `80` | Superposición entre fragmentos |
+| `RETRIEVER_K` | No | `10` | Fragmentos que llegan al LLM |
+| `PINECONE_INDEX_NAME` | No | `financebot-rag` | Índice de Pinecone |
+| `PINECONE_NAMESPACE` | No | `financial_docs` | Namespace |
+| `EMBEDDING_MODEL` | No | `intfloat/multilingual-e5-large` | Modelo de embeddings (dim 1024) |
+| `RERANKER_MODEL` | No | `BAAI/bge-reranker-v2-m3` | CrossEncoder |
+| `RERANKER_CANDIDATES_MULTIPLIER` | No | `2` | Candidatos = K × multiplier |
+| `MIN_RERANK_SCORE` | No | `0.1` | Debajo → respuesta fija sin LLM |
 
 ---
 
@@ -255,8 +280,8 @@ project2-rag-chatbot/
 │   │   ├── documents.py      # POST /documents/ingest, GET /documents
 │   │   └── chat.py           # POST /chat/ask
 │   └── services/
-│       ├── ingest_service.py # Chunking + embeddings + ChromaDB
-│       └── rag_service.py    # Retrieval + generación con Claude
+│       ├── ingest_service.py # Chunking + embeddings e5 + Pinecone
+│       └── rag_service.py    # Retrieval + rerank + Gemini estructurado + guardas
 ├── data/
 │   └── sample_docs/
 │       ├── productos_financieros.txt   # Documentos de demo
@@ -265,7 +290,12 @@ project2-rag-chatbot/
 │   ├── conftest.py           # Fixtures con mock lifespan
 │   ├── test_health.py
 │   ├── test_documents.py
-│   └── test_chat.py
+│   ├── test_chat.py
+│   ├── test_ingest_service.py
+│   └── test_rag_service.py
+├── evaluation/               # RAGAS: dataset, scripts y resultados
+├── scripts/                  # Reindexado de Pinecone
+├── CHANGELOG.md
 ├── .env.example
 ├── .gitignore
 ├── Dockerfile
@@ -280,17 +310,17 @@ project2-rag-chatbot/
 
 ## Decisiones técnicas
 
-### ¿Por qué sentence-transformers y no embeddings de Anthropic?
-Anthropic no ofrece una API de embeddings. Se eligió `all-MiniLM-L6-v2` porque:
-- Es gratuito y corre localmente (sin costo adicional de API)
-- 384 dimensiones — buen balance entre rendimiento y velocidad
-- ~90MB — liviano para un contenedor Docker
+### ¿Por qué Gemini + Pinecone + modelos locales?
+Costo mínimo: Gemini 2.5 Flash y Pinecone tienen free tier, y embeddings/reranker corren localmente (sin costo por request).
 
-### ¿Por qué ChromaDB y no FAISS?
-ChromaDB ofrece **persistencia automática en disco** sin configuración extra. FAISS requiere serialización manual. Para un proyecto con API REST donde los documentos se deben preservar entre reinicios, ChromaDB es más conveniente.
+### ¿Por qué reranker?
+La similitud coseno trae candidatos razonables pero mal ordenados; el CrossEncoder lee pregunta y fragmento juntos y mejora la precisión del contexto (Runs 17–20 en `MASTER_LOG`).
+
+### Garantías en código, criterio en el prompt
+Lo que debe cumplirse siempre (aviso de urgencia, respuesta "sin información", validación de citas) está en código, no confiado al prompt. El LLM devuelve salida estructurada (`LLMAnswer`) y solo se muestran las fuentes que citó.
 
 ### Patrón `create_app(lifespan_fn=)`
 Permite inyectar un lifespan mockeado en los tests, evitando cargar modelos de ML (~30s) en cada test. Los tests corren en <1 segundo.
 
 ### Separación IngestService / RAGService
-Ambos comparten la misma instancia de `Chroma`. Cuando `IngestService` agrega documentos, el retriever de `RAGService` los encuentra automáticamente en la siguiente consulta.
+Ambos comparten la misma instancia de `PineconeVectorStore`. Cuando `IngestService` agrega documentos, el retriever de `RAGService` los encuentra automáticamente en la siguiente consulta.

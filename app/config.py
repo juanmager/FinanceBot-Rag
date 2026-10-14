@@ -40,8 +40,9 @@ class Settings(BaseSettings):
     reranker_model: str = "BAAI/bge-reranker-v2-m3"
     reranker_candidates_multiplier: int = 2  # Baseline multiplier
     # Si el mejor score del reranker queda por debajo -> fallback sin llamar al LLM.
-    # Calibrado con evaluation/calibrate_threshold.py
-    min_rerank_score: float = 0.0
+    # Calibrado con evaluation/calibrate_threshold.py (14/10/2026): fuera de tema <= 0.001
+    # (salvo "plazo fijo Banco Nación" 0.395), en dominio min 0.245.
+    min_rerank_score: float = 0.1
 
     class Config:
         env_file = ".env"

@@ -17,7 +17,7 @@ context_recall      → ¿Se recuperaron todos los chunks necesarios para respon
 ────────────────────────────────────────────────────────────────────
 
 Uso:
-    python evaluation/run_evaluation.py
+    python evaluation/run_evaluation.py [--use-cache]   (--use-cache: reusa respuestas ya recolectadas)
 
 Requisitos:
     pip install ragas datasets
@@ -153,8 +153,9 @@ def print_report(results: dict) -> None:
 def main() -> None:
     settings = get_settings()
 
-    # Usar cache si existe (evita repetir llamadas a Gemini para recolección)
-    if DATASET_CACHE_PATH.exists():
+    # Cache solo con --use-cache: por defecto se recolecta de nuevo, para que un cambio
+    # de código/config no se evalúe en silencio con respuestas viejas.
+    if "--use-cache" in sys.argv and DATASET_CACHE_PATH.exists():
         print(f"\n📦 Cargando dataset desde cache: {DATASET_CACHE_PATH}")
         with open(DATASET_CACHE_PATH, encoding="utf-8") as f:
             cached = json.load(f)
