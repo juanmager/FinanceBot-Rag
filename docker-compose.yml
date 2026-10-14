@@ -10,7 +10,7 @@ services:
       - "8001:8000"   # Puerto 8001 en el host para no colisionar con el Proyecto 1
     environment:
       - GOOGLE_API_KEY=${GOOGLE_API_KEY}
-      - GEMINI_MODEL=${GEMINI_MODEL:-gemini-2.5-flash}
+      - GEMINI_MODEL=${GEMINI_MODEL:-gemini-3.8-flash}
       - MAX_TOKENS=${MAX_TOKENS:-2048}
       - CHUNK_SIZE=${CHUNK_SIZE:-1000}
       - CHUNK_OVERLAP=${CHUNK_OVERLAP:-200}

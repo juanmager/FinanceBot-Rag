@@ -13,7 +13,7 @@ class Settings(BaseSettings):
 
     # ── Google Gemini ────────────────────────────
     google_api_key: str
-    gemini_model: str = "gemini-2.5-flash"
+    gemini_model: str = "gemini-3.8-flash"
     max_tokens: int = 2048
 
     # ── App ────────────────────────────────────────────────────
